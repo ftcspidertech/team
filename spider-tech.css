@@ -1,15 +1,15 @@
 /* Global Styles */
 body {
-    background-color: #0099ff;
-    color: white;
-    font-family: Arial, sans-serif;
+    background-color: #000000;
+    color: Red;
+    font-family: Garamond, sans-serif;
     margin: 0;
     padding: 0;
 }
 
 
 header {
-    background-color: #0099ff;
+    background-color: #808080;
     padding: 20px;
     text-align: center;
 }
@@ -30,7 +30,7 @@ section h2 {
 
 /* Team Members */
 #team-members {
-    background-color: #0069d9;
+    background-color: #FF0000;
 }
 
 .member {
@@ -44,3 +44,4 @@ footer {
     padding: 15px;
     font-size: 0.9em;
 }
+
