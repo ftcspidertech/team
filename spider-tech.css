@@ -372,7 +372,7 @@
             <div class="logo">🕷️ SPIDERTECH</div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#team">Team</a></li>
+                <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -384,35 +384,55 @@
         <div class="hero-content">
             <h1>SPIDERTECH</h1>
             <p>Weaving innovation into the digital realm. Where technology meets creativity in an intricate web of possibilities.</p>
-            <button class="cta-button" onclick="document.getElementById('team').scrollIntoView({behavior: 'smooth'})">
+            <button class="cta-button" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
                 Discover Our Web
             </button>
         </div>
     </section>
 
-    <!-- Team Section -->
-    <section class="section" id="team">
-        <h2>Our Team</h2>
+    <!-- About Section -->
+    <section class="section" id="about">
+        <h2>About Our Team</h2>
+        <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
+            <p style="font-size: 1.2em; line-height: 1.6; color: #ccc; margin-bottom: 30px;">
+                Spidertech is a collective of passionate innovators who thrive at the intersection of technology and creativity. 
+                Like a spider carefully crafting its web, we meticulously design and develop solutions that connect, inspire, and transform.
+            </p>
+            <p style="font-size: 1.1em; line-height: 1.6; color: #999;">
+                Our diverse team brings together unique perspectives, skills, and experiences to tackle complex challenges 
+                and weave extraordinary digital experiences that push the boundaries of what's possible.
+            </p>
+        </div>
         <div class="team-grid">
             <div class="team-card">
-                <div class="team-avatar">🕷️</div>
-                <h3>Web Architect</h3>
-                <p>Master of digital infrastructure, weaving complex systems with precision and elegance.</p>
+                <div class="team-avatar" style="background: linear-gradient(45deg, #ff0000, #cc0000);">B</div>
+                <h3>Bilal</h3>
+                <p>Full-Stack Developer & Team Lead</p>
+                <p style="margin-top: 10px; font-size: 0.9em; color: #999;">Orchestrating the digital symphony with expertise in both frontend artistry and backend architecture.</p>
             </div>
             <div class="team-card">
-                <div class="team-avatar">🕸️</div>
-                <h3>Code Weaver</h3>
-                <p>Crafting intricate algorithms and spinning elegant solutions from lines of code.</p>
+                <div class="team-avatar" style="background: linear-gradient(45deg, #666, #999);">T</div>
+                <h3>Taha</h3>
+                <p>Software Engineer & Problem Solver</p>
+                <p style="margin-top: 10px; font-size: 0.9em; color: #999;">Transforming complex challenges into elegant code solutions with precision and innovation.</p>
             </div>
             <div class="team-card">
-                <div class="team-avatar">🔴</div>
-                <h3>Design Spider</h3>
-                <p>Creating visually stunning interfaces that capture users in our digital web.</p>
+                <div class="team-avatar" style="background: linear-gradient(45deg, #ff0000, #666);">N</div>
+                <h3>Nashmia</h3>
+                <p>UI/UX Designer & Creative Visionary</p>
+                <p style="margin-top: 10px; font-size: 0.9em; color: #999;">Weaving user experiences that are both beautiful and intuitive, bridging design and functionality.</p>
             </div>
             <div class="team-card">
-                <div class="team-avatar">⚡</div>
-                <h3>Tech Innovator</h3>
-                <p>Pushing boundaries and exploring new territories in the ever-expanding digital landscape.</p>
+                <div class="team-avatar" style="background: linear-gradient(45deg, #999, #ff0000);">A</div>
+                <h3>Aydin</h3>
+                <p>Backend Developer & System Architect</p>
+                <p style="margin-top: 10px; font-size: 0.9em; color: #999;">Building robust infrastructures that power our applications with scalability and reliability.</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar" style="background: linear-gradient(45deg, #cc0000, #666);">N</div>
+                <h3>Nameer</h3>
+                <p>DevOps Engineer & Tech Strategist</p>
+                <p style="margin-top: 10px; font-size: 0.9em; color: #999;">Ensuring seamless deployment and optimization across all our digital ecosystems.</p>
             </div>
         </div>
     </section>
