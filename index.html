@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FTC SpiderTech</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
@@ -15,7 +16,7 @@
             color: #000000;
         }
 
-        /* Subtle SpiderTech geometric background */
+        /* Geometric background pattern */
         body::before {
             content: "";
             position: fixed;
@@ -47,6 +48,7 @@
             color: #ffffff;
             text-shadow: 3px 3px 10px rgba(0,0,0,0.6);
             text-align: center;
+            padding: 0 20px;
         }
 
         /* Navigation bar */
@@ -60,6 +62,7 @@
             position: sticky;
             top: 0;
             z-index: 10;
+            flex-wrap: wrap;
         }
 
         nav a {
@@ -102,7 +105,7 @@
             margin-bottom: 15px;
         }
 
-        /* Balanced layout: text + media side-by-side */
+        /* Layout structure */
         .content-row {
             display: flex;
             gap: 30px;
@@ -131,6 +134,22 @@
             align-items: center;
             font-size: 18px;
             color: #555;
+        }
+
+        .media-box {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .media-box video,
+        .media-box img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            display: block;
         }
 
         /* Hardware Grid Styling */
@@ -168,7 +187,7 @@
             color: #333333;
         }
 
-        /* Dropdown Expand / Collapse styling */
+        /* Hardware Dropdown Styling */
         .hardware-card details {
             margin-top: auto;
             border-top: 1px dashed #e3e3e3;
@@ -211,15 +230,78 @@
             color: #444444;
             margin-top: 10px;
         }
+
+        /* Outreach Accordion Styling */
+        .accordion {
+            background-color: #ffffff;
+            border-left: 5px solid #000000;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .accordion summary {
+            cursor: pointer;
+            list-style: none;
+            padding: 20px;
+            font-size: 22px;
+            font-weight: 600;
+            color: #000000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .accordion summary::after {
+            content: "+";
+            font-size: 26px;
+            font-weight: 700;
+            color: #d40000;
+            margin-left: 20px;
+        }
+
+        .accordion[open] summary::after {
+            content: "\2212";
+        }
+
+        .accordion summary:hover {
+            color: #d40000;
+        }
+
+        .accordion-content {
+            padding: 0 20px 20px 20px;
+        }
+
+        .accordion-content .content-row {
+            margin-bottom: 0;
+        }
+
+        .accordion-content .text-box {
+            border-left: none;
+            padding: 0;
+            font-size: 19px;
+        }
+
+        /* Responsive Breakpoint */
+        @media (max-width: 600px) {
+            .hero-banner { height: 220px; }
+            .hero-text { font-size: 32px; }
+            .section { padding: 40px 20px; }
+        }
     </style>
 </head>
 
 <body>
 
+    <!-- HERO BANNER -->
     <div class="hero-banner">
         <div class="hero-text">FTC SpiderTech</div>
     </div>
 
+    <!-- NAVIGATION BAR -->
     <nav>
         <a href="#about">About Us</a>
         <a href="#seasons">Seasons</a>
@@ -227,6 +309,7 @@
         <a href="#outreach">Outreach</a>
     </nav>
 
+    <!-- ABOUT US -->
     <div class="section" id="about">
         <h2>About Us</h2>
         <div class="content-row">
@@ -235,6 +318,7 @@
         </div>
     </div>
 
+    <!-- SEASONS -->
     <div class="section" id="seasons">
         <h2>Seasons</h2>
 
@@ -287,6 +371,7 @@
         </div>
     </div>
 
+    <!-- RESOURCES -->
     <div class="section" id="resources">
         <h2>Resources</h2>
         <div class="content-row">
@@ -295,12 +380,39 @@
         </div>
     </div>
 
+    <!-- OUTREACH -->
     <div class="section" id="outreach">
         <h2>Outreach</h2>
-        <div class="content-row">
-            <div class="text-box">Text Placeholder — describe outreach events, community work, etc.</div>
-            <div class="placeholder">Image / Video Placeholder</div>
-        </div>
+
+        <details class="accordion" open>
+            <summary>Roboball</summary>
+            <div class="accordion-content">
+                <div class="content-row">
+                    <div class="text-box">From very early on, it was our plan to bring FTC to our community to show them just how enjoyable it can be. However, as a small team, this was no easy task. But, with meticulous planning and hard work, we organized Roboball, an event which allowed children of all ages to understand and enjoy participating in the FTC.</div>
+                    <div class="placeholder">Image / Video Placeholder</div>
+                </div>
+            </div>
+        </details>
+
+        <details class="accordion">
+            <summary>Placeholder Event 2</summary>
+            <div class="accordion-content">
+                <div class="content-row">
+                    <div class="text-box">Text Placeholder — describe this outreach event.</div>
+                    <div class="placeholder">Image / Video Placeholder</div>
+                </div>
+            </div>
+        </details>
+
+        <details class="accordion">
+            <summary>Placeholder Event 3</summary>
+            <div class="accordion-content">
+                <div class="content-row">
+                    <div class="text-box">Text Placeholder — describe this outreach event.</div>
+                    <div class="placeholder">Image / Video Placeholder</div>
+                </div>
+            </div>
+        </details>
     </div>
 
 </body>
