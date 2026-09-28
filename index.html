@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FTC SpiderTech</title>
 
+    <!-- Modern, appealing font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
 
     <style>
@@ -123,6 +124,14 @@
             min-height: 150px;
         }
 
+        .text-box p {
+            margin: 0 0 16px 0;
+        }
+
+        .text-box p:last-child {
+            margin-bottom: 0;
+        }
+
         .placeholder {
             flex: 1;
             min-width: 300px;
@@ -150,6 +159,67 @@
             height: auto;
             border-radius: 4px;
             display: block;
+        }
+
+        /* MEET THE TEAM — big group photo */
+        .team-photo-big {
+            width: 100%;
+            height: 400px;
+            background-color: #e3e3e3;
+            border: 2px dashed #999;
+            border-top: 5px solid #d40000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: #555;
+            box-sizing: border-box;
+            margin-top: 30px;
+        }
+
+        /* MEET THE TEAM — 4 card grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .team-card {
+            background-color: #ffffff;
+            border-top: 5px solid #d40000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            padding: 20px 0;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .team-name {
+            font-size: 19px;
+            font-weight: 700;
+            color: #000000;
+            margin: 0 0 4px 0;
+        }
+
+        .team-role {
+            font-size: 14px;
+            font-weight: 500;
+            color: #0057ff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .team-bio {
+            font-size: 14px;
+            color: #333;
+            padding: 0 18px;
+            line-height: 1.5;
         }
 
         /* Hardware Grid Styling */
@@ -285,11 +355,18 @@
             font-size: 19px;
         }
 
-        /* Responsive Breakpoint */
+        /* Responsive Breakpoints */
+        @media (max-width: 900px) {
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 600px) {
             .hero-banner { height: 220px; }
             .hero-text { font-size: 32px; }
             .section { padding: 40px 20px; }
+            .team-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -313,8 +390,37 @@
     <div class="section" id="about">
         <h2>About Us</h2>
         <div class="content-row">
-            <div class="text-box">Text Placeholder — write about your team, mission, history, etc.</div>
-            <div class="placeholder">Image / Video Placeholder</div>
+            <div class="text-box">
+                <p> Spider-Tech is a driven four-person robotics team competing in the FIRST Tech Challenge, with the goal of becoming one of the top teams in the region.</p>
+                <p> Although the 2025-2026 season was our rookie year, we quickly made our mark, earning multiple awards and advancing all the way to the State Championship.</p>
+                <p>Our small but mighty team handles everything ourselves — design, hardware, software, and outreach — allowing us to move fast and innovate at every stage of the build process. We pride ourselves on creativity, precision, and relentless problem-solving under pressure.</p>
+                <p>This season, we will push ourselves to learn faster, build smarter, and compete harder than the year before. With a strong foundation already in place, we're just getting started on our journey to the top.</p>
+            </div>
+        </div>
+
+        <h3>Meet the Team</h3>
+        <div class="team-photo-big"><img src="Images/Image_Team.png"></div>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-name">Nameer</div>
+                <div class="team-role">Hardware Manager</div>
+                <div class="team-bio">Nameer is the team's youngest member and serves as Hardware Manager, building, testing, and organizing the robot alongside others. He also leads the team's image, creating team videos, designing T-shirts, and helping develop the team logo.</div>
+            </div>
+            <div class="team-card">
+                <div class="team-name">Aydin</div>
+                <div class="team-role">Communication Manager</div>
+                <div class="team-bio">Aydin is the team's Communication Manager, keeping everything organized both online and behind the scenes. He manages the ClickUp workspace, tracks team progress, and captures the robot and team moments through photography and videography. He's known for his attention to detail and impressive precision with cutting.</div>
+            </div>
+            <div class="team-card">
+                <div class="team-name">Taha</div>
+                <div class="team-role">All-Rounder</div>
+                <div class="team-bio">Taha is the team's All-Rounder, jumping in wherever he's needed, whether that's hardware, software, or strategy. He's known for being hardworking and always willing to put in extra time to get the job done right. Taha also keeps the team's energy up with his humor, making even the longest build sessions more fun.</div>
+            </div>
+            <div class="team-card">
+                <div class="team-name">Nashmia</div>
+                <div class="team-role">Software Engineer</div>
+                <div class="team-bio">Nashmia is the team's Software Engineer, responsible for writing and debugging the code that drives the robot. She's hardworking and dedicated, often spending extra time refining the robot's programming to make sure it performs reliably. Her problem-solving mindset makes her a key part of the team's success.</div>
+            </div>
         </div>
     </div>
 
@@ -324,7 +430,9 @@
 
         <h3>Decode</h3>
         <div class="content-row">
-            <div class="text-box">Text Placeholder — describe your Decode season, robot, awards, etc.</div>
+            <div class="text-box">Decode was our rookie year as a team. We used materials from REV for building our robots. We competed in 2 qualifiers, earning the Connect Award in the former, and the Think Award in the latter. For a more detailed overview of our season, take a look at <a href="https://ftc-events.firstinspires.org/2025/team/30573" target="_blank" rel="noopener noreferrer">
+        FIRST FTC Events Page
+    </a> </div>
             <div class="placeholder">Image / Video Placeholder</div>
         </div>
 
@@ -366,54 +474,50 @@
 
         <h3>BioBuzz</h3>
         <div class="content-row">
-            <div class="text-box">Text Placeholder — describe your BioBuzz season, highlights, etc.</div>
-            <div class="placeholder">Image / Video Placeholder</div>
+            <div class="text-box"> We were at the season kickoff! Right now, we are analyzing different startbots and brainstorming ideas for the season. Stay tuned!</div>
+            <!--<div class="placeholder">Image / Video Placeholder</div>-->
+	    <img src="Images/Image_Kickoff.jpeg">
         </div>
     </div>
 
-    <!-- RESOURCES -->
-    <div class="section" id="resources">
-        <h2>Resources</h2>
-        <div class="content-row">
-            <div class="text-box">Text Placeholder — add links, documents, tutorials, etc.</div>
-            <div class="placeholder">Image / Video Placeholder</div>
+   <!-- RESOURCES -->
+<div class="section" id="resources">
+    <h2>Resources</h2>
+    <div class="content-row" style="justify-content:left;">
+     <div class="text-box" style="max-height: 200px;">
+            <p>You can find the code from our Decode season 
+                <a href="https://github.com/ftcspidertech/decode/tree/main/org.firstinspires.ftc.teamcode" target="_blank" rel="noopener noreferrer">here</a>.
+            </p>
         </div>
     </div>
-
+</div>
     <!-- OUTREACH -->
     <div class="section" id="outreach">
         <h2>Outreach</h2>
 
-        <details class="accordion" open>
+              <!-- Event: Roboball -->
+        <details class="accordion">
             <summary>Roboball</summary>
             <div class="accordion-content">
                 <div class="content-row">
-                    <div class="text-box">From very early on, it was our plan to bring FTC to our community to show them just how enjoyable it can be. However, as a small team, this was no easy task. But, with meticulous planning and hard work, we organized Roboball, an event which allowed children of all ages to understand and enjoy participating in the FTC.</div>
+                    <div class="text-box"> In May 2026, we launched Roboball, a Decode inspired game for elementary and middle school students. We modified the rules, created new game strategies, and simplified the missions themselves to make it more engaging for younger students. As a team of 4, the planning was meticulous leading up to the event itself. Time slots, food management, and award distributions were finalized across multiple sessions, and eventually, our  hard work paid off. 29 kids showed up throughout the 6 hour event. For more than half of these kids, it was their first time being exposed to robotics, and they enjoyed it thoroughly.  </div>
                     <div class="placeholder">Image / Video Placeholder</div>
                 </div>
             </div>
         </details>
 
+        <!-- Placeholder Event 2 -->
         <details class="accordion">
-            <summary>Placeholder Event 2</summary>
+            <summary>Shrewsbury Public Library Event</summary>
             <div class="accordion-content">
                 <div class="content-row">
-                    <div class="text-box">Text Placeholder — describe this outreach event.</div>
+                    <div class="text-box">On August 8th, we held a teen teach event that focused on educating incoming FTC students and coaches on the Do's and Dont's for your rookie season. We discussed the mistakes we made in the hardware, software, and planning, and followed this by explaning what the proper way to complete these tasks would've been. </div>
                     <div class="placeholder">Image / Video Placeholder</div>
                 </div>
             </div>
         </details>
 
-        <details class="accordion">
-            <summary>Placeholder Event 3</summary>
-            <div class="accordion-content">
-                <div class="content-row">
-                    <div class="text-box">Text Placeholder — describe this outreach event.</div>
-                    <div class="placeholder">Image / Video Placeholder</div>
-                </div>
-            </div>
-        </details>
-    </div>
+       </div>
 
 </body>
 </html>
