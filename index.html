@@ -6,15 +6,20 @@
     <title>FTC SpiderTech</title>
 
     <!-- Modern, appealing font -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
             background: linear-gradient(135deg, #ffffff 0%, #f7f7f7 100%);
             color: #000000;
+            overflow-x: hidden;
         }
 
         /* Geometric background pattern */
@@ -29,49 +34,146 @@
             z-index: -1;
         }
 
-        /* HERO BANNER */
+        /* ================= HERO SLIDESHOW BANNER ================= */
         .hero-banner {
+            position: relative;
             width: 100%;
-            height: 350px;
+            height: 420px;
             background-color: #000;
-            background-image: url('https://via.placeholder.com/1600x500?text=SpiderTech+Banner');
+            overflow: hidden;
+            border-bottom: 5px solid #d40000;
+        }
+
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+            transform: scale(1.03);
             background-size: cover;
             background-position: center;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Dark gradient overlay on slides for text legibility */
+        .hero-slide::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.65));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            border-bottom: 5px solid #d40000;
+            pointer-events: none;
         }
 
         .hero-text {
             font-size: 56px;
             font-weight: 700;
             color: #ffffff;
-            text-shadow: 3px 3px 10px rgba(0,0,0,0.6);
+            text-shadow: 3px 3px 12px rgba(0,0,0,0.8);
             text-align: center;
             padding: 0 20px;
+            letter-spacing: 1.5px;
         }
 
-        /* Navigation bar */
+        /* Slide controls (Arrows and Dots) */
+        .hero-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            background: rgba(0, 0, 0, 0.4);
+            color: #ffffff;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease, transform 0.2s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .hero-arrow:hover {
+            background: #d40000;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .hero-arrow.left { left: 20px; }
+        .hero-arrow.right { right: 20px; }
+
+        .hero-dots {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.2);
+        }
+
+        .dot.active, .dot:hover {
+            background: #d40000;
+            transform: scale(1.25);
+        }
+
         nav {
             width: 100%;
-            padding: 10px 4px;
+            padding: 12px 20px;
             display: flex;
             justify-content: flex-end;
             align-items: center;
             background-color: #000;
             position: sticky;
             top: 0;
-            z-index: 10;
+            z-index: 100;
             flex-wrap: wrap;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         nav a {
             color: #fff;
-            margin-left: 15px;
+            margin-left: 20px;
             text-decoration: none;
             font-weight: 500;
             font-size: 16px;
+            transition: color 0.2s ease;
         }
 
         nav a:hover {
@@ -80,6 +182,8 @@
 
         .section {
             padding: 60px 40px;
+            max-width: 1300px;
+            margin: 0 auto;
         }
 
         h2 {
@@ -106,12 +210,12 @@
             margin-bottom: 15px;
         }
 
-        /* Layout structure */
         .content-row {
             display: flex;
             gap: 30px;
             margin-bottom: 40px;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .text-box {
@@ -119,9 +223,11 @@
             min-width: 300px;
             background-color: #ffffff;
             border-left: 5px solid #000000;
-            padding: 20px;
+            padding: 24px;
             font-size: 16px;
-            min-height: 150px;
+            line-height: 1.6;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border-radius: 0 8px 8px 0;
         }
 
         .text-box p {
@@ -132,52 +238,66 @@
             margin-bottom: 0;
         }
 
-        .placeholder {
-            flex: 1;
-            min-width: 300px;
-            height: 200px;
-            background-color: #e3e3e3;
-            border: 2px dashed #999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 18px;
-            color: #555;
+        .text-box a {
+            color: #0057ff;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .text-box a:hover {
+            text-decoration: underline;
         }
 
         .media-box {
             flex: 1;
             min-width: 300px;
+            max-width: 550px;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+            border-radius: 8px;
         }
 
         .media-box video,
         .media-box img {
             width: 100%;
-            height: auto;
-            border-radius: 4px;
+            max-height: 350px;
+            object-fit: cover;
+            border-radius: 8px;
             display: block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+            transition: transform 0.3s ease;
         }
 
-        /* MEET THE TEAM — big group photo */
+        .media-box img:hover {
+            transform: scale(1.02);
+        }
+
         .team-photo-big {
             width: 100%;
-            height: 400px;
+            height: 420px;
             background-color: #e3e3e3;
-            border: 2px dashed #999;
             border-top: 5px solid #d40000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            color: #555;
-            box-sizing: border-box;
-            margin-top: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 20px;
+            position: relative;
         }
 
-        /* MEET THE TEAM — 4 card grid */
+        .team-photo-big img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .team-photo-big:hover img {
+            transform: scale(1.015);
+        }
+
         .team-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -188,41 +308,41 @@
         .team-card {
             background-color: #ffffff;
             border-top: 5px solid #d40000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            padding: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            padding: 24px 16px;
             text-align: center;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border-radius: 0 0 8px 8px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
         .team-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.12);
         }
 
         .team-name {
-            font-size: 19px;
+            font-size: 20px;
             font-weight: 700;
             color: #000000;
-            margin: 0 0 4px 0;
+            margin: 0 0 6px 0;
         }
 
         .team-role {
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 13px;
+            font-weight: 700;
             color: #0057ff;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 10px;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
         }
 
         .team-bio {
             font-size: 14px;
-            color: #333;
-            padding: 0 18px;
-            line-height: 1.5;
+            color: #444;
+            padding: 0 8px;
+            line-height: 1.55;
         }
 
-        /* Hardware Grid Styling */
         .hardware-grid {
             display: flex;
             gap: 20px;
@@ -232,7 +352,7 @@
 
         .hardware-card {
             flex: 1;
-            min-width: 320px;
+            min-width: 300px;
             background-color: #ffffff;
             border: 1px solid #e3e3e3;
             border-top: 4px solid #0057ff;
@@ -240,6 +360,7 @@
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
+            border-radius: 4px;
         }
 
         .hardware-card img {
@@ -248,6 +369,7 @@
             object-fit: contain;
             background-color: #f9f9f9;
             margin-bottom: 15px;
+            border-radius: 4px;
         }
 
         .hardware-card p {
@@ -257,7 +379,6 @@
             color: #333333;
         }
 
-        /* Hardware Dropdown Styling */
         .hardware-card details {
             margin-top: auto;
             border-top: 1px dashed #e3e3e3;
@@ -301,18 +422,105 @@
             margin-top: 10px;
         }
 
-        /* Outreach Accordion Styling */
+        .collage-3 {
+            flex: 1;
+            min-width: 320px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 150px 150px;
+            gap: 10px;
+            height: 310px;
+        }
+
+        .collage-3 .collage-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            background-color: #f0f0f0;
+        }
+
+        .collage-3 .collage-item:nth-child(1) {
+            grid-column: 1 / 2;
+            grid-row: 1 / 3;
+            height: 100%;
+        }
+
+        .collage-3 .collage-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .collage-3 .collage-item:hover img {
+            transform: scale(1.06);
+        }
+
+        .collage-badge {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 4px;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+            border-left: 3px solid #d40000;
+        }
+
+        .collage-4 {
+            flex: 1;
+            min-width: 320px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: 140px 140px;
+            gap: 10px;
+            height: 290px;
+        }
+
+        .collage-4 .collage-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            background-color: #f0f0f0;
+        }
+
+        .collage-4 .collage-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .collage-4 .collage-item:hover img {
+            transform: scale(1.06);
+        }
+
         .accordion {
             background-color: #ffffff;
             border-left: 5px solid #000000;
             margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
             overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            transition: box-shadow 0.2s ease;
+        }
+
+        .accordion:hover {
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
         }
 
         .accordion summary {
             cursor: pointer;
             list-style: none;
-            padding: 20px;
+            padding: 20px 24px;
             font-size: 22px;
             font-weight: 600;
             color: #000000;
@@ -331,6 +539,7 @@
             font-weight: 700;
             color: #d40000;
             margin-left: 20px;
+            transition: transform 0.2s ease;
         }
 
         .accordion[open] summary::after {
@@ -342,7 +551,7 @@
         }
 
         .accordion-content {
-            padding: 0 20px 20px 20px;
+            padding: 0 24px 24px 24px;
         }
 
         .accordion-content .content-row {
@@ -352,30 +561,69 @@
         .accordion-content .text-box {
             border-left: none;
             padding: 0;
-            font-size: 19px;
+            font-size: 17px;
+            box-shadow: none;
+            border-radius: 0;
         }
 
-        /* Responsive Breakpoints */
         @media (max-width: 900px) {
             .team-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .collage-3, .collage-4 {
+                height: 260px;
+            }
+            .collage-3 {
+                grid-template-rows: 125px 125px;
+            }
+            .collage-4 {
+                grid-template-rows: 125px 125px;
+            }
         }
 
         @media (max-width: 600px) {
-            .hero-banner { height: 220px; }
+            .hero-banner { height: 260px; }
             .hero-text { font-size: 32px; }
+            .hero-arrow { width: 36px; height: 36px; font-size: 18px; }
             .section { padding: 40px 20px; }
             .team-grid { grid-template-columns: 1fr; }
+            .team-photo-big { height: 260px; }
+            .content-row { flex-direction: column; }
+            .collage-3, .collage-4 {
+                width: 100%;
+                height: 240px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- HERO BANNER -->
+    <!-- AUTO-SLIDING HERO BANNER -->
     <div class="hero-banner">
-        <div class="hero-text">FTC SpiderTech</div>
+        <div class="hero-slider" id="heroSlider">
+            <!-- Slide 1 -->
+            <div class="hero-slide active" style="background-image: url('images/Image_Team.png'), url('https://placehold.co/1600x600/111111/FFFFFF?text=FTC+SpiderTech+Team');"></div>
+            <!-- Slide 2 -->
+            <div class="hero-slide" style="background-image: url('images/Image_Kickoff.jpeg'), url('https://placehold.co/1600x600/0057ff/FFFFFF?text=BioBuzz+Kickoff');"></div>
+            <!-- Slide 3 -->
+            <div class="hero-slide" style="background-image: url('images/RoboBall3.jpeg'), url('https://placehold.co/1600x600/d40000/FFFFFF?text=RoboBall+Event');"></div>
+            <!-- Slide 4 -->
+            <div class="hero-slide" style="background-image: url('images/MassStateChampionship.jpeg'), url('https://placehold.co/1600x600/222222/FFFFFF?text=State+Championship');"></div>
+            <!-- Slide 5 -->
+            <div class="hero-slide" style="background-image: url('images/SPL_event.jpeg'), url('https://placehold.co/1600x600/000000/FFFFFF?text=Library+Event');"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-text">FTC SpiderTech</div>
+        </div>
+
+        <!-- Controls -->
+        <button class="hero-arrow left" id="prevSlide" aria-label="Previous Slide">&#10094;</button>
+        <button class="hero-arrow right" id="nextSlide" aria-label="Next Slide">&#10095;</button>
+
+        <!-- Indicator Dots -->
+        <div class="hero-dots" id="heroDots"></div>
     </div>
 
     <!-- NAVIGATION BAR -->
@@ -391,15 +639,17 @@
         <h2>About Us</h2>
         <div class="content-row">
             <div class="text-box">
-                <p> Spider-Tech is a driven four-person robotics team competing in the FIRST Tech Challenge, with the goal of becoming one of the top teams in the region.</p>
-                <p> Although the 2025-2026 season was our rookie year, we quickly made our mark, earning multiple awards and advancing all the way to the State Championship.</p>
+                <p>Spider-Tech is a driven four-person robotics team competing in the FIRST Tech Challenge, with the goal of becoming one of the top teams in the region.</p>
+                <p>Although the 2025-2026 season was our rookie year, we quickly made our mark, earning multiple awards and advancing all the way to the State Championship.</p>
                 <p>Our small but mighty team handles everything ourselves — design, hardware, software, and outreach — allowing us to move fast and innovate at every stage of the build process. We pride ourselves on creativity, precision, and relentless problem-solving under pressure.</p>
                 <p>This season, we will push ourselves to learn faster, build smarter, and compete harder than the year before. With a strong foundation already in place, we're just getting started on our journey to the top.</p>
             </div>
         </div>
 
         <h3>Meet the Team</h3>
-        <div class="team-photo-big"><img src="images/Image_Team.png"></div>
+        <div class="team-photo-big">
+            <img src="images/Image_Team.png" alt="FTC SpiderTech Team Photo" onerror="this.src='https://placehold.co/1200x500/111111/FFFFFF?text=FTC+SpiderTech+Team+Photo'">
+        </div>
         <div class="team-grid">
             <div class="team-card">
                 <div class="team-name">Nameer</div>
@@ -430,16 +680,31 @@
 
         <h3>Decode</h3>
         <div class="content-row">
-            <div class="text-box">Decode was our rookie year as a team. We used materials from REV for building our robots. We competed in 2 qualifiers, earning the Connect Award in the former, and the Think Award in the latter. For a more detailed overview of our season, take a look at <a href="https://ftc-events.firstinspires.org/2025/team/30573" target="_blank" rel="noopener noreferrer">
-        FIRST FTC Events Page
-    </a> </div>
-            <div class="placeholder">Image / Video Placeholder</div>
+            <div class="text-box">
+                <p>Decode was our rookie year as a team. We used materials from REV for building our robots. We competed in 2 qualifiers, earning the Connect Award in the former, and the Think Award in the latter.</p>
+                <p>For a more detailed overview of our season, take a look at the <a href="https://ftc-events.firstinspires.org/2025/team/30573" target="_blank" rel="noopener noreferrer">FIRST FTC Events Page</a>.</p>
+            </div>
+            <!-- Decode Season Photo Collage -->
+            <div class="collage-3">
+                <div class="collage-item">
+                    <img src="images/MassStateChampionship.jpeg" alt="MA State Championship" onerror="this.src='https://placehold.co/600x800/d40000/FFFFFF?text=State+Championship'">
+                    <div class="collage-badge">State Championship</div>
+                </div>
+                <div class="collage-item">
+                    <img src="images/ConnectAward.jpeg" alt="Connect Award" onerror="this.src='https://placehold.co/600x400/0057ff/FFFFFF?text=Connect+Award'">
+                    <div class="collage-badge">Connect Award</div>
+                </div>
+                <div class="collage-item">
+                    <img src="images/ThinkAward.jpeg" alt="Think Award" onerror="this.src='https://placehold.co/600x400/111111/FFFFFF?text=Think+Award'">
+                    <div class="collage-badge">Think Award</div>
+                </div>
+            </div>
         </div>
 
         <h4>Hardware</h4>
         <div class="hardware-grid">
             <div class="hardware-card">
-                <img src="images/robot1.png" alt="Robot Iteration 1">
+                <img src="images/robot1.png" alt="Robot Iteration 1" onerror="this.src='https://placehold.co/400x320/f0f0f0/555555?text=Robot+Iteration+1'">
                 <p><strong>Iteration 1</strong></p>
                 <details>
                     <summary>Read Description</summary>
@@ -450,7 +715,7 @@
             </div>
 
             <div class="hardware-card">
-                <img src="images/robot2.png" alt="Robot Iteration 2">
+                <img src="images/robot2.png" alt="Robot Iteration 2" onerror="this.src='https://placehold.co/400x320/f0f0f0/555555?text=Robot+Iteration+2'">
                 <p><strong>Iteration 2</strong></p>
                 <details>
                     <summary>Read Description</summary>
@@ -461,7 +726,7 @@
             </div>
 
             <div class="hardware-card">
-                <img src="images/robot3.png" alt="Robot Iteration 3">
+                <img src="images/robot3.png" alt="Robot Iteration 3" onerror="this.src='https://placehold.co/400x320/f0f0f0/555555?text=Robot+Iteration+3'">
                 <p><strong>Iteration 3</strong></p>
                 <details>
                     <summary>Read Description</summary>
@@ -474,50 +739,139 @@
 
         <h3>BioBuzz</h3>
         <div class="content-row">
-            <div class="text-box"> We were at the season kickoff! Right now, we are analyzing different startbots and brainstorming ideas for the season. Stay tuned!</div>
-            <!--<div class="placeholder">Image / Video Placeholder</div>-->
-	    <img src="images/Image_Kickoff.jpeg">
+            <div class="text-box">We were at the season kickoff! Right now, we are analyzing different startbots and brainstorming ideas for the season. Stay tuned!</div>
+            <div class="media-box">
+                <img src="images/Image_Kickoff.jpeg" alt="BioBuzz Kickoff Event" onerror="this.src='https://placehold.co/600x350/0057ff/FFFFFF?text=Kickoff+Event'">
+            </div>
         </div>
     </div>
 
-   <!-- RESOURCES -->
-<div class="section" id="resources">
-    <h2>Resources</h2>
-    <div class="content-row" style="justify-content:left;">
-     <div class="text-box" style="max-height: 200px;">
-            <p>You can find the code from our Decode season 
-                <a href="https://github.com/ftcspidertech/decode/tree/main/org.firstinspires.ftc.teamcode" target="_blank" rel="noopener noreferrer">here</a>.
-            </p>
+    <!-- RESOURCES -->
+    <div class="section" id="resources">
+        <h2>Resources</h2>
+        <div class="content-row" style="justify-content:left;">
+            <div class="text-box" style="max-height: 200px;">
+                <p>You can find the code from our Decode season 
+                    <a href="https://github.com/ftcspidertech/decode/tree/main/org.firstinspires.ftc.teamcode" target="_blank" rel="noopener noreferrer">here</a>.
+                </p>
+            </div>
         </div>
     </div>
-</div>
+
     <!-- OUTREACH -->
     <div class="section" id="outreach">
         <h2>Outreach</h2>
 
-              <!-- Event: Roboball -->
+        <!-- Event: Roboball -->
         <details class="accordion">
             <summary>Roboball</summary>
             <div class="accordion-content">
                 <div class="content-row">
-                    <div class="text-box"> In May 2026, we launched Roboball, a Decode inspired game for elementary and middle school students. We modified the rules, created new game strategies, and simplified the missions themselves to make it more engaging for younger students. As a team of 4, the planning was meticulous leading up to the event itself. Time slots, food management, and award distributions were finalized across multiple sessions, and eventually, our  hard work paid off. 29 kids showed up throughout the 6 hour event. For more than half of these kids, it was their first time being exposed to robotics, and they enjoyed it thoroughly.  </div>
-                    <div class="placeholder">Image / Video Placeholder</div>
+                    <div class="text-box">
+                        <p>In May 2026, we launched Roboball, a Decode inspired game for elementary and middle school students. We modified the rules, created new game strategies, and simplified the missions themselves to make it more engaging for younger students. As a team of 4, the planning was meticulous leading up to the event itself. Time slots, food management, and award distributions were finalized across multiple sessions, and eventually, our hard work paid off. 29 kids showed up throughout the 6 hour event. For more than half of these kids, it was their first time being exposed to robotics, and they enjoyed it thoroughly.</p>
+                    </div>
+                    <!-- Roboball 4-Image Collage -->
+                    <div class="collage-4">
+                        <div class="collage-item">
+                            <img src="images/RoboBall3.jpeg" alt="RoboBall Event Photo 3" onerror="this.src='https://placehold.co/400x300/111111/FFFFFF?text=RoboBall+3'">
+                        </div>
+                        <div class="collage-item">
+                            <img src="images/RoboBall5.jpeg" alt="RoboBall Event Photo 5" onerror="this.src='https://placehold.co/400x300/d40000/FFFFFF?text=RoboBall+5'">
+                        </div>
+                        <div class="collage-item">
+                            <img src="images/RoboBall4.jpeg" alt="RoboBall Event Photo 4" onerror="this.src='https://placehold.co/400x300/0057ff/FFFFFF?text=RoboBall+4'">
+                        </div>
+                        <div class="collage-item">
+                            <img src="images/RoboBall2.jpeg" alt="RoboBall2 Event Photo 2" onerror="this.src='https://placehold.co/400x300/333333/FFFFFF?text=RoboBall+2'">
+                        </div>
+                    </div>
                 </div>
             </div>
         </details>
 
-        <!-- Placeholder Event 2 -->
+        <!-- Event: Shrewsbury Public Library Event -->
         <details class="accordion">
             <summary>Shrewsbury Public Library Event</summary>
             <div class="accordion-content">
                 <div class="content-row">
-                    <div class="text-box">On August 8th, we held a teen teach event that focused on educating incoming FTC students and coaches on the Do's and Dont's for your rookie season. We discussed the mistakes we made in the hardware, software, and planning, and followed this by explaning what the proper way to complete these tasks would've been. </div>
-                    <div class="placeholder">Image / Video Placeholder</div>
+                    <div class="text-box">
+                        <p>On August 8th, we held a teen teach event that focused on educating incoming FTC students and coaches on the Do's and Dont's for your rookie season. We discussed the mistakes we made in the hardware, software, and planning, and followed this by explaining what the proper way to complete these tasks would've been.</p>
+                    </div>
+                    <div class="media-box">
+                        <img src="images/SPL_event.jpeg" alt="Shrewsbury Public Library Event" onerror="this.src='https://placehold.co/600x350/000000/FFFFFF?text=Shrewsbury+Public+Library+Event'">
+                    </div>
                 </div>
             </div>
         </details>
 
-       </div>
+    </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.hero-slide');
+            const dotsContainer = document.getElementById('heroDots');
+            const prevBtn = document.getElementById('prevSlide');
+            const nextBtn = document.getElementById('nextSlide');
+            
+            let currentIndex = 0;
+            let slideInterval;
+            const slideDuration = 4000; // Auto slide every 4 seconds
+
+            // Generate indicator dots dynamically
+            slides.forEach((_, idx) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (idx === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    goToSlide(idx);
+                    resetTimer();
+                });
+                dotsContainer.appendChild(dot);
+            });
+
+            const dots = document.querySelectorAll('.dot');
+
+            function goToSlide(index) {
+                slides[currentIndex].classList.remove('active');
+                dots[currentIndex].classList.remove('active');
+                
+                currentIndex = (index + slides.length) % slides.length;
+                
+                slides[currentIndex].classList.add('active');
+                dots[currentIndex].classList.add('active');
+            }
+
+            function nextSlide() {
+                goToSlide(currentIndex + 1);
+            }
+
+            function prevSlide() {
+                goToSlide(currentIndex - 1);
+            }
+
+            function startTimer() {
+                slideInterval = setInterval(nextSlide, slideDuration);
+            }
+
+            function resetTimer() {
+                clearInterval(slideInterval);
+                startTimer();
+            }
+
+            // Arrow Event Listeners
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetTimer();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetTimer();
+            });
+
+            // Start automatic slide loop
+            startTimer();
+        });
+    </script>
 </body>
 </html>
