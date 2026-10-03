@@ -274,28 +274,37 @@
             transform: scale(1.02);
         }
 
+        /* Fixed & Zoomed-out Meet the Team image frame */
         .team-photo-big {
             width: 100%;
-            height: 420px;
-            background-color: #e3e3e3;
+            height: auto;
+            max-height: 520px;
+            background-color: #ffffff;
             border-top: 5px solid #d40000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             border-radius: 8px;
             overflow: hidden;
             margin-top: 20px;
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px;
+            box-sizing: border-box;
         }
 
         .team-photo-big img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            max-height: 480px;
+            object-fit: contain;
             display: block;
-            transition: transform 0.4s ease;
+            border-radius: 4px;
+            transition: transform 0.3s ease;
         }
 
         .team-photo-big:hover img {
-            transform: scale(1.015);
+            transform: scale(1.01);
         }
 
         .team-grid {
@@ -587,7 +596,7 @@
             .hero-arrow { width: 36px; height: 36px; font-size: 18px; }
             .section { padding: 40px 20px; }
             .team-grid { grid-template-columns: 1fr; }
-            .team-photo-big { height: 260px; }
+            .team-photo-big { height: auto; max-height: 320px; }
             .content-row { flex-direction: column; }
             .collage-3, .collage-4 {
                 width: 100%;
@@ -599,7 +608,6 @@
 
 <body>
 
-    <!-- AUTO-SLIDING HERO BANNER -->
     <div class="hero-banner">
         <div class="hero-slider" id="heroSlider">
             <!-- Slide 1 -->
@@ -626,7 +634,6 @@
         <div class="hero-dots" id="heroDots"></div>
     </div>
 
-    <!-- NAVIGATION BAR -->
     <nav>
         <a href="#about">About Us</a>
         <a href="#seasons">Seasons</a>
@@ -634,7 +641,6 @@
         <a href="#outreach">Outreach</a>
     </nav>
 
-    <!-- ABOUT US -->
     <div class="section" id="about">
         <h2>About Us</h2>
         <div class="content-row">
@@ -647,9 +653,11 @@
         </div>
 
         <h3>Meet the Team</h3>
+        <!-- Uncropped Zoomed-Out Team Frame -->
         <div class="team-photo-big">
             <img src="images/Image_Team.png" alt="FTC SpiderTech Team Photo" onerror="this.src='https://placehold.co/1200x500/111111/FFFFFF?text=FTC+SpiderTech+Team+Photo'">
         </div>
+
         <div class="team-grid">
             <div class="team-card">
                 <div class="team-name">Nameer</div>
@@ -674,7 +682,6 @@
         </div>
     </div>
 
-    <!-- SEASONS -->
     <div class="section" id="seasons">
         <h2>Seasons</h2>
 
@@ -746,7 +753,6 @@
         </div>
     </div>
 
-    <!-- RESOURCES -->
     <div class="section" id="resources">
         <h2>Resources</h2>
         <div class="content-row" style="justify-content:left;">
@@ -758,7 +764,6 @@
         </div>
     </div>
 
-    <!-- OUTREACH -->
     <div class="section" id="outreach">
         <h2>Outreach</h2>
 
